@@ -18,8 +18,7 @@ class Cryptography {
  * or better yet an asymmetric encryption(which I'd love to in an ideal
  * world but for the purpose this will have to do). I am considering some
  * pseudo-random algorithm based on environment sensors and some sort of
- * hash ring but that is a bit I'm kicking that can down the road to 
- * future me.
+ * hash ring but I'm kicking that can down the road to future me.
  * 
  * Future me: I'm a time traveler, I'm here to tell you to go fuck yourself.
  */
