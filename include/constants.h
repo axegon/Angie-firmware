@@ -9,5 +9,6 @@
 #define BAND    868E6
 #define MAX_MESSAGE_LENGTH 128
 #define ENCRYPTION_KEY_ADDR 0
+#define MODE_ADDR 1
 
 #define WIRE Wire
