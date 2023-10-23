@@ -13,7 +13,7 @@ class Cryptography {
 
 /*
  * In all honesty, encryption might be a very strong statement here. 
- * In reality this is nothing more than a Ceaser cypher but the available
+ * In reality this is nothing more than a Caeser cypher but the available
  * memory is a fair bit less than I would need to run something like AES
  * or better yet an asymmetric encryption(which I'd love to in an ideal
  * world but for the purpose this will have to do). I am considering some
