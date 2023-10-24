@@ -1,5 +1,8 @@
 #include <Arduino.h>
 
+/*
+ * I have a slight suspicion I'm going to hate my life here. Oh well...
+ */
 class SingleBoardController {
   public: 
     virtual void Init() = 0;

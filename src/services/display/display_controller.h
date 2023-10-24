@@ -98,11 +98,16 @@ class DisplayImpl: public DisplayContoller {
     display.setTextSize(1);
     display.setTextColor(SSD1306_INVERSE);
     setCursor(0, 0);
-    clearDisplay();
   }
 
+  /*
+   * Stupidly enough, clearDisplay() doesn't actually clear the 
+   * display, it only clears the buffer. So the dirty hack is
+   * to clear the buffer and print a space. Yeah, dumb, I know.
+   */
   void clearDisplay() override {
     display.clearDisplay();
+    printText(" ");
   }
 
   void setCursor(int x, int y) override {

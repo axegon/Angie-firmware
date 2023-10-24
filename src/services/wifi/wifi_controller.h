@@ -18,6 +18,13 @@ class WifiController {
     virtual void Begin() = 0;
 };
 
+/*
+ * I haven't fully figured out this part or what I want to do with it yet.
+ * For starters, most SBC's have a built in WiFi and bluetooth for that
+ * matter. It would be cool if I can figure out how to relay the traffic
+ * from the SBC to the ESP32 and vice versa. I'mma cross that bridge when
+ * I get there.
+ */
 class WifiControllerImpl: public WifiController {
   public:
     void Init(String ssid, String password, WiFiMode mode) override {
@@ -26,6 +33,9 @@ class WifiControllerImpl: public WifiController {
       this->mode = mode;
     }
 
+    /*
+     * This should work. Keyword: "should".
+     */
     void Connect() override {
       if (mode == STATION || mode == STATION_AND_ACCESS_POINT) {
         WiFi.begin(ssid.c_str(), password.c_str());
@@ -40,11 +50,17 @@ class WifiControllerImpl: public WifiController {
       }
     }
 
+    /*
+     * Same as above.
+     */
     void Disconnect() override {
       WiFi.disconnect();
       Serial.println("Disconnected from WiFi");
     }
 
+    /*
+     * Same as above ++.
+     */
     void Begin() override {
       if (mode == ACCESS_POINT || mode == STATION_AND_ACCESS_POINT) {
         WiFi.softAP(ssid.c_str(), password.c_str());
