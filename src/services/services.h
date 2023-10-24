@@ -12,43 +12,29 @@ enum Mode {
   NONE,
 };
 
-class ServicesController {
-  private: 
-    virtual void bootsplash() = 0;
+class Services {
+  private:
+    DisplayImpl display;
+    BluetoothController * pBluetooth;
+    LoraControllerImpl lora;
   public: 
-    virtual void Init(int eeprom_addr) = 0;
-    virtual void encrypt(const String & s) = 0;
-    virtual void decrypt(const String & s) = 0;
+    virtual void Init() = 0;
 };
 
-class ServicesControllerImpl: public ServicesController {
-  private:
+class ServicesImpl: public Services {
+protected:
+    DisplayImpl display;
+    BluetoothController * pBluetooth;
+    LoraControllerImpl lora;
     Mode mode;
   public:
-    void Init(int eeprom_addr) override {
-      EEPROM.begin(4);
-        Mode mode = static_cast<Mode>(EEPROM.read(eeprom_addr));
-        EEPROM.end();
-
-        if (mode < BLUETOOTH || mode > LORA) mode = Mode::SETUP;
+    void Init() override {
+        lora.Init();
+        vTaskDelay(100);
+        Serial.begin(115200);
+        display.Init(Adafruit_SSD1306(128, 64, & WIRE));
+        vTaskDelay(2000);
+        display.clearDisplay();
+        pBluetooth = new BluetoothImpl(5);
     }
 };
-
-
-
-
-void writeModeToEEPROM(Mode mode, int addr) {
-  EEPROM.begin(4);
-  EEPROM.write(addr, static_cast<int>(mode));
-  EEPROM.commit();
-  EEPROM.end();
-}
-
-Mode readModeFromEEPROM(int addr) {
-  EEPROM.begin(4);
-  Mode mode = static_cast<Mode>(EEPROM.read(addr));
-  EEPROM.end();
-
-  if (mode < BLUETOOTH || mode > LORA) return NONE;
-  return mode;
-}
