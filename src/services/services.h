@@ -2,6 +2,7 @@
 #include "display/display_controller.h"
 #include "bluetooth/bluetooth_controller.h"
 #include "lora/lora_controller.h"
+#include "wifi/wifi_controller.h"
 
 
 enum Mode {
