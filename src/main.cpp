@@ -2,14 +2,13 @@
 
 #include "constants.h"
 
-#include "services/services.h"
+#include "Services.h"
 
-ServicesImpl services;
+ServiceImpl services;
 
 
 void setup() {
   services.Init();
 }
 
-void loop() {
-}
+void loop(){}

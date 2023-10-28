@@ -1,12 +1,10 @@
-#include <Wire.h>
+#pragma once
 
 #include <Adafruit_GFX.h>
 
 #include <Adafruit_SSD1306.h>
 
-#define WIRE Wire
-
-class DisplayContoller {
+class DisplayService {
   private: 
     virtual void bootsplash() = 0;
   public: 
@@ -17,7 +15,7 @@ class DisplayContoller {
     virtual void clearPrint(const String & s) = 0;
 };
 
-class DisplayImpl: public DisplayContoller {
+class DisplayImpl: public DisplayService {
   private: Adafruit_SSD1306 display;
   void bootsplash() override {
     const unsigned char epd_bitmap_bootsplash [] PROGMEM = {

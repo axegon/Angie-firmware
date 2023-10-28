@@ -3,7 +3,7 @@
 /*
  * I have a slight suspicion I'm going to hate my life here. Oh well...
  */
-class SingleBoardController {
+class SingleBoardService {
   public: 
     virtual void Init() = 0;
     virtual void powerOn() = 0;

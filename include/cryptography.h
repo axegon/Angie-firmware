@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#pragma once
 #include <EEPROM.h>
 #include "constants.h"
 

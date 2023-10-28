@@ -1,22 +1,6 @@
+#include <Arduino.h>
 #include <WiFi.h>
-
-enum WiFiMode {
-  STATION,
-  ACCESS_POINT,
-  STATION_AND_ACCESS_POINT,
-};
-
-class WifiController {
-  protected:
-    String ssid;
-    String password;
-    WiFiMode mode;
-  public: 
-    virtual void Init(String ssid, String password, WiFiMode mode) = 0;
-    virtual void Connect() = 0;
-    virtual void Disconnect() = 0;
-    virtual void Begin() = 0;
-};
+#include "WifiService.h"
 
 /*
  * I haven't fully figured out this part or what I want to do with it yet.
@@ -25,7 +9,7 @@ class WifiController {
  * from the SBC to the ESP32 and vice versa. I'mma cross that bridge when
  * I get there.
  */
-class WifiControllerImpl: public WifiController {
+class WifiControllerImpl: public WifiService {
   public:
     void Init(String ssid, String password, WiFiMode mode) override {
       this->ssid = ssid;

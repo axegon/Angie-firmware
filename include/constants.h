@@ -1,5 +1,3 @@
-#include <Wire.h>
-
 #define SCK     5
 #define MISO    19
 #define MOSI    27
@@ -10,5 +8,6 @@
 #define MAX_MESSAGE_LENGTH 128
 #define ENCRYPTION_KEY_ADDR 0
 #define MODE_ADDR 1
+#define ENABLE_SERIAL 1
 
 #define WIRE Wire
