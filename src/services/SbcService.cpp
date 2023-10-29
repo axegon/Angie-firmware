@@ -38,6 +38,7 @@ void SingleBoardServiceImpl::powerOff()  {
 void SingleBoardServiceImpl::reboot() {
     Serial.println("SbcServiceImpl::reboot()");
     powerOff();
+    vTaskDelay(500);
     powerOn();
 };
 
