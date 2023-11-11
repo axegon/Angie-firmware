@@ -33,10 +33,19 @@ void LoraControllerImpl::Init() {
  * Ave Caesar! Morituri te salutant!
  */
 void LoraControllerImpl::tx(const String &s) {
-  String encrypted = s;
-  crypto.encrypt(encrypted);
+  unsigned int length = s.length();
+  byte data[length];
+  for(unsigned int i = 0; i < length; i++) {
+    data[i] = (byte)s[i];
+  }
+  crypto.encrypt(data, length);
+
+  String encrypted = "";
+  for(unsigned int i = 0; i < length; i++) {
+    encrypted += (char)data[i];
+  }
   LoRa.beginPacket();
-  LoRa.print(encrypted);
+  LoRa.print(s);
   LoRa.endPacket();
 }
 
@@ -44,7 +53,15 @@ void LoraControllerImpl::tx(const String &s) {
  * More lazy writing....
  */
 void LoraControllerImpl::rx(String &s) {
-  String decrypted = s;
-  crypto.decrypt(decrypted);
+  unsigned int length = s.length();
+  byte data[length];
+  for(unsigned int i = 0; i < length; i++) {
+    data[i] = (byte)s[i];
+  }
+  crypto.decrypt(data, length);
+  String decrypted = "";
+  for(unsigned int i = 0; i < length; i++) {
+    decrypted += (char)data[i];
+  }
   s = decrypted;
 }

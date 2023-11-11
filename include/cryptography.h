@@ -6,8 +6,8 @@
 class Cryptography {
   public: 
     virtual void Init(int eepromAddr) = 0;
-    virtual void encrypt(String & s) = 0;
-    virtual void decrypt(String & s) = 0;
+    virtual void encrypt(byte* data, unsigned int length) = 0;
+    virtual void decrypt(byte* data, unsigned int length) = 0;
     virtual void setEncryptionKey(byte newKey) = 0;
 };
 
@@ -35,19 +35,18 @@ class CryptographyImpl: public Cryptography {
      * As Brian Johnson once faimously sang: 
      * "Women to the left of me."
      */
-    void encrypt(String & s) override {
-      Serial.println(encryptionKey);
-      for (unsigned int i = 0; i < s.length(); i++) {
-        s[i] = s[i] + encryptionKey;
+    void encrypt(byte* data, unsigned int length) override {
+      for (unsigned int i = 0; i < length; i++) {
+        data[i] = data[i] + encryptionKey;
       }
     }
     
     /*
      *  "...And women to the right"
      */
-    void decrypt(String & s) override {
-      for (unsigned int i = 0; i < s.length(); i++) {
-        s[i] = s[i] - encryptionKey;
+    void decrypt(byte* data, unsigned int length) override {
+      for (unsigned int i = 0; i < length; i++) {
+        data[i] = data[i] - encryptionKey; // Simple decryption; consider a more secure method
       }
     }
 
